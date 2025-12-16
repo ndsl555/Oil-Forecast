@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_home_graph"
+    app:startDestination="@id/navigationWeatherFragment">
+
+    <fragment
+        android:id="@+id/navigationWeatherFragment"
+        android:name="com.example.oil_forecast.WeatherFragment"
+        tools:layout="@layout/fragment_weather"
+
+        />
+
+
+    <action
+        android:id="@+id/action_global_to_navigationWeatherFragment"
+        app:destination="@id/navigationWeatherFragment"
+        app:enterAnim="@anim/nav_push_from_right_in"
+        app:exitAnim="@anim/nav_push_from_left_out"
+        app:popEnterAnim="@anim/nav_push_from_left_in"
+        app:popExitAnim="@anim/nav_push_from_right_out">
+
+    </action>
+
+
+
+</navigation>

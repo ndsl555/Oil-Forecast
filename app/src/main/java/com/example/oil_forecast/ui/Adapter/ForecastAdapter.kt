@@ -65,12 +65,11 @@ class ForecastAdapter :
             odt.format(DateTimeFormatter.ofPattern("MM-dd HH:mm"))
         } catch (e: Exception) {
             // 如果解析失敗，就手動去掉 T、秒數和時區
-            time.replace("T", " ")        // 去掉 T
-                .substringBefore("+")      // 去掉 +08:00
-                .take(16)                  // 取前 16 個字元或字串結尾
+            time.replace("T", " ") // 去掉 T
+                .substringBefore("+") // 去掉 +08:00
+                .take(16) // 取前 16 個字元或字串結尾
         }
     }
-
 
     override fun getItemCount() = data.size
 }

@@ -3,14 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_home_graph"
-    app:startDestination="@id/navigationWeatherFragment">
+    app:startDestination="@id/navigationAQIFragment">
 
     <fragment
         android:id="@+id/navigationWeatherFragment"
         android:name="com.example.oil_forecast.WeatherFragment"
         tools:layout="@layout/fragment_weather"
-
         />
+
+    <fragment
+        android:id="@+id/navigationAQIFragment"
+        android:name="com.example.oil_forecast.AQIFragment"
+        tools:layout="@layout/fragment_aqi"/>
+
 
 
     <action
@@ -23,6 +28,14 @@
 
     </action>
 
+    <action
+        android:id="@+id/action_global_to_navigationAQIFragment"
+        app:destination="@id/navigationAQIFragment"
+        app:enterAnim="@anim/nav_push_from_right_in"
+        app:exitAnim="@anim/nav_push_from_left_out"
+        app:popEnterAnim="@anim/nav_push_from_left_in"
+        app:popExitAnim="@anim/nav_push_from_right_out">
+    </action>
 
 
 </navigation>

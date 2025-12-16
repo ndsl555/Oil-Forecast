@@ -30,8 +30,10 @@ class MainActivity :
             Log.d("FragmentCheck", "BottomNavigationView item clicked: ${it.itemId}")
 
             when (it.itemId) {
+                R.id.navigation_aqi -> {
+                    navController.navigate(NavHomeGraphDirections.actionGlobalToNavigationAQIFragment())
+                }
                 R.id.navigation_weather -> {
-                    Log.d("FragmentCheck", "SFragment navigationPocketFragment")
                     navController.navigate(NavHomeGraphDirections.actionGlobalToNavigationWeatherFragment())
                 }
             }

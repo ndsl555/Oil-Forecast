@@ -48,11 +48,12 @@ class ForecastDialogFragment : DialogFragment(), View.OnClickListener {
     private fun initView() {
         binding.fabRefresh.setOnClickListener(this)
         binding.rvForecast.apply {
-            layoutManager = LinearLayoutManager(
-                requireContext(),
-                LinearLayoutManager.HORIZONTAL, // 改成橫向
-                false
-            )
+            layoutManager =
+                LinearLayoutManager(
+                    requireContext(),
+                    LinearLayoutManager.HORIZONTAL, // 改成橫向
+                    false,
+                )
             adapter = this@ForecastDialogFragment.adapter
         }
     }

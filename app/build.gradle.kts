@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.ktlint)
     alias(libs.plugins.androidx.navigation.safe.args) // ✅ Add this line
     id("com.google.devtools.ksp") version "2.2.0-2.0.2"
+    id("kotlin-parcelize")
 }
 
 android {
@@ -18,7 +19,6 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        manifestPlaceholders += mapOf("MAPS_API_KEY" to (project.findProperty("MAPS_API_KEY") ?: ""))
     }
 
     buildTypes {

@@ -18,6 +18,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        app:srcCompat="@drawable/baseline_arrow_circle_left_24" />
+        app:srcCompat="@drawable/sharp_close_small_24" />
 
 </FrameLayout>

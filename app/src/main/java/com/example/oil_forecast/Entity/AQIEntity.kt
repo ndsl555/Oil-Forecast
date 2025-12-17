@@ -1,5 +1,9 @@
 package com.example.oil_forecast.Entity
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class AQIEntity(
     val siteName: String,
     val county: String,
@@ -22,7 +26,7 @@ data class AQIEntity(
     val pm2_5_avg: Double?,
     val pm10_avg: Double?,
     val so2_avg: Double?,
-    val longitude: Double?,
-    val latitude: Double?,
+    val longitude: Double,
+    val latitude: Double,
     val siteId: String,
-)
+) : Parcelable

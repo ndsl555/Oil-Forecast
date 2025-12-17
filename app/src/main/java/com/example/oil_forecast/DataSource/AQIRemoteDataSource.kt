@@ -45,8 +45,8 @@ class AQIRemoteDataSource(
                                 pm2_5_avg = record.pm2_5_avg.toDoubleOrNull(),
                                 pm10_avg = record.pm10_avg.toDoubleOrNull(),
                                 so2_avg = record.so2_avg.toDoubleOrNull(),
-                                longitude = record.longitude.toDoubleOrNull(),
-                                latitude = record.latitude.toDoubleOrNull(),
+                                longitude = record.longitude.toDouble(),
+                                latitude = record.latitude.toDouble(),
                                 siteId = record.siteId,
                             )
                         } ?: emptyList()

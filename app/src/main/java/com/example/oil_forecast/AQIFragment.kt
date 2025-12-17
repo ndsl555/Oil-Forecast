@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.oil_forecast.Adapter.LocationAdapter
+import androidx.navigation.fragment.findNavController
 import com.example.oil_forecast.Extension.launchAndRepeatWithViewLifecycle
 import com.example.oil_forecast.ViewModels.AQIViewModel
 import com.example.oil_forecast.databinding.FragmentAqiBinding
@@ -17,8 +17,6 @@ class AQIFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: AQIViewModel by viewModel()
-
-    private lateinit var locationAdapter: LocationAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,21 +38,14 @@ class AQIFragment : Fragment() {
         initView()
         initParam()
 
-        viewModel.fetchAQIs()
+//        viewModel.fetchAQIs()
     }
 
     private fun initView() {
-//        locationAdapter =
-//            LocationAdapter { geocode ->
-//                ForecastDialogFragment
-//                    .newInstance(geocode)
-//                    .show(parentFragmentManager, "forecast_dialog")
-//            }
-//
-//        binding.rvLocations.apply {
-//            layoutManager = GridLayoutManager(requireContext(), 3)
-//            adapter = locationAdapter
-//        }
+        binding.btnTest2.setOnClickListener {
+            val action = AQIFragmentDirections.actionNavigationAQIFragmentToAqiListFragment()
+            findNavController().navigate(action)
+        }
     }
 
     private fun initParam() {

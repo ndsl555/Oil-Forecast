@@ -7,4 +7,12 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+
+    <!-- AQI 顏色 -->
+    <color name="aqi_green">#4CAF50</color>        <!-- 良好 -->
+    <color name="aqi_yellow">#FFEB3B</color>       <!-- 普通 -->
+    <color name="aqi_orange">#FF9800</color>       <!-- 對敏感族群不健康 -->
+    <color name="aqi_red">#F44336</color>          <!-- 對所有族群不健康 -->
+    <color name="aqi_purple">#9C27B0</color>       <!-- 非常不健康 -->
+    <color name="aqi_brown">#795548</color>        <!-- 危害 -->
 </resources>

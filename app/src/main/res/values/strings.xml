@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">OIl-Forecast</string>
+    <string name="dscend">由高到低</string>
+    <string name="ascend">由低到高</string>
 </resources>

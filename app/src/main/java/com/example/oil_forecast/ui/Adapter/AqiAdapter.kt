@@ -8,7 +8,9 @@ import com.example.oil_forecast.Entity.AQIEntity
 import com.example.oil_forecast.R
 import com.example.oil_forecast.databinding.ItemAqiBinding
 
-class AqiAdapter : RecyclerView.Adapter<AqiAdapter.VH>() {
+class AqiAdapter(
+    private val onClick: (item: AQIEntity) -> Unit,
+) : RecyclerView.Adapter<AqiAdapter.VH>() {
     private val data = mutableListOf<AQIEntity>()
 
     fun submit(list: List<AQIEntity>) {
@@ -23,7 +25,12 @@ class AqiAdapter : RecyclerView.Adapter<AqiAdapter.VH>() {
         parent: ViewGroup,
         viewType: Int,
     ): VH {
-        val binding = ItemAqiBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemAqiBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false,
+            )
         return VH(binding)
     }
 
@@ -32,11 +39,12 @@ class AqiAdapter : RecyclerView.Adapter<AqiAdapter.VH>() {
         position: Int,
     ) {
         val item = data[position]
+
         holder.binding.tvRank.text = (position + 1).toString()
         holder.binding.tvCountry.text = item.county
         holder.binding.tvSiteName.text = item.siteName
         holder.binding.tvAqiValue.text = item.aqi.toString()
-        // 根據 AQI 狀態改變文字顏色
+
         val context = holder.itemView.context
         val color =
             when (item.status) {
@@ -48,7 +56,12 @@ class AqiAdapter : RecyclerView.Adapter<AqiAdapter.VH>() {
                 "危害" -> ContextCompat.getColor(context, R.color.aqi_brown)
                 else -> ContextCompat.getColor(context, R.color.black)
             }
+
         holder.binding.tvAqiValue.setTextColor(color)
+
+        holder.itemView.setOnClickListener {
+            onClick(item)
+        }
     }
 
     override fun getItemCount() = data.size

@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ktlint)
-    alias(libs.plugins.androidx.navigation.safe.args) // ✅ Add this line
+    alias(libs.plugins.androidx.navigation.safe.args) //  Add this line
     id("com.google.devtools.ksp") version "2.2.0-2.0.2"
     id("kotlin-parcelize")
 }
@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.gridlayout)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.common.jvm)
     implementation(libs.androidx.room.ktx)
@@ -74,7 +75,7 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging.interceptor)
     implementation(libs.androidx.camera.core)
-    ksp(libs.moshi.kotlin.codegen) // ✅ 注意是 kapt，不是 implementation
+    ksp(libs.moshi.kotlin.codegen) //  注意是 kapt，不是 implementation
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -13,7 +13,6 @@ import com.example.oil_forecast.Extension.launchAndRepeatWithViewLifecycle
 import com.example.oil_forecast.ViewModels.AQIViewModel
 import com.example.oil_forecast.databinding.FragmentAqiListBinding
 import com.example.oil_forecast.ui.Adapter.AqiAdapter
-import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AqiListFragment : Fragment() {
@@ -63,7 +62,12 @@ class AqiListFragment : Fragment() {
 
     private fun initView() {
         setHasOptionsMenu(true)
-        aqiAdapter = AqiAdapter()
+        aqiAdapter =
+            AqiAdapter { item ->
+                AQIDetailFragment
+                    .newInstance(item)
+                    .show(parentFragmentManager, "forecast_dialog")
+            }
         binding.rvAqiList.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = aqiAdapter

@@ -6,6 +6,13 @@
     app:startDestination="@id/navigationAQIFragment">
 
     <fragment
+        android:id="@+id/navigationDetailFragment"
+        android:name="com.example.oil_forecast.AQIDetailFragment"
+        tools:layout="@layout/fragment_detail_dialog"
+        />
+
+
+    <fragment
         android:id="@+id/navigationWeatherFragment"
         android:name="com.example.oil_forecast.WeatherFragment"
         tools:layout="@layout/fragment_weather"

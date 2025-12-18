@@ -2,4 +2,6 @@
     <string name="app_name">OIl-Forecast</string>
     <string name="dscend">由高到低</string>
     <string name="ascend">由低到高</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

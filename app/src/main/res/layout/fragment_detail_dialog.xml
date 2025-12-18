@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".AQIDetailFragment">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="384dp"
+        android:layout_height="488dp"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- 標題 -->
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="空氣品質"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- 圓形 AQI -->
+            <ProgressBar
+                android:id="@+id/circular_determinative_pb"
+                android:layout_width="337dp"
+                android:layout_height="265dp"
+                android:layout_marginTop="12dp"
+                android:indeterminateOnly="false"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@drawable/pb_circular_determinative"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView" />
+
+            <!-- AQI 狀態 -->
+
+            <TextView
+                android:id="@+id/progress_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@id/circular_determinative_pb"
+                app:layout_constraintEnd_toEndOf="@id/circular_determinative_pb"
+                app:layout_constraintHorizontal_bias="0.502"
+                app:layout_constraintStart_toStartOf="@id/circular_determinative_pb"
+                app:layout_constraintTop_toTopOf="@id/circular_determinative_pb"
+                app:layout_constraintVertical_bias="0.402"
+                tools:text="50" />
+
+            <TextView
+                android:id="@+id/status_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                app:layout_constraintTop_toBottomOf="@id/progress_tv"
+                app:layout_constraintStart_toStartOf="@id/circular_determinative_pb"
+                app:layout_constraintEnd_toEndOf="@id/circular_determinative_pb"
+                tools:text="良好"
+                android:layout_marginTop="4dp"/>
+
+            <!-- 汙染物區塊 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/pollutionContainer"
+                android:layout_width="352dp"
+                android:layout_height="194dp"
+                android:padding="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/circular_determinative_pb"
+                app:layout_constraintVertical_bias="0.0">
+
+                <!-- 第一排 -->
+                <include
+                    android:id="@+id/item_pm25"
+                    layout="@layout/item_pollution"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    app:layout_constraintEnd_toStartOf="@id/item_pm10"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.5" />
+
+                <include
+                    android:id="@+id/item_pm10"
+                    layout="@layout/item_pollution"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/item_pm25"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.5" />
+
+                <!-- 第二排 -->
+                <include
+                    android:id="@+id/item_no2"
+                    layout="@layout/item_pollution"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+
+                    android:layout_marginEnd="4dp"
+                    app:layout_constraintEnd_toStartOf="@id/item_o3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/item_pm25"
+                    app:layout_constraintWidth_percent="0.5" />
+
+                <include
+                    android:id="@+id/item_o3"
+                    layout="@layout/item_pollution"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/item_no2"
+                    app:layout_constraintTop_toBottomOf="@id/item_pm10"
+                    app:layout_constraintWidth_percent="0.5" />
+
+                <!-- 第三排 -->
+                <include
+                    android:id="@+id/item_co"
+                    layout="@layout/item_pollution"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+
+                    android:layout_marginEnd="4dp"
+                    app:layout_constraintEnd_toStartOf="@id/item_so2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/item_no2"
+                    app:layout_constraintWidth_percent="0.5" />
+
+                <include
+                    android:id="@+id/item_so2"
+                    layout="@layout/item_pollution"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/item_co"
+                    app:layout_constraintTop_toBottomOf="@id/item_o3"
+                    app:layout_constraintWidth_percent="0.5" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

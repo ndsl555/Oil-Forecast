@@ -48,6 +48,11 @@ class WeatherFragment : Fragment() {
     }
 
     private fun initParam() {
+        // Get stored location
+        val locationPref = LocationPref(requireContext())
+        val currentCity = locationPref.getLocation()
+        val cityPrefix = currentCity?.substring(0, 2)
+
         launchAndRepeatWithViewLifecycle {
             viewModel.locations.collect { locations ->
                 this@WeatherFragment.locations = locations
@@ -55,6 +60,14 @@ class WeatherFragment : Fragment() {
                 if (locations.isNotEmpty()) {
                     val pagerAdapter = WeatherPagerAdapter(this@WeatherFragment, locations)
                     binding.viewPager.adapter = pagerAdapter
+
+                    // If we have a stored location, find the matching page
+                    if (cityPrefix != null) {
+                        val matchedIndex = locations.indexOfFirst { it.locationName.contains(cityPrefix) }
+                        if (matchedIndex != -1) {
+                            binding.viewPager.currentItem = matchedIndex
+                        }
+                    }
                 }
             }
         }

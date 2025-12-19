@@ -1,20 +1,25 @@
 package com.example.oil_forecast
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.oil_forecast.Utils.LocationUtils
 import com.example.oil_forecast.Utils.NetworkUtils
 import com.example.oil_forecast.Utils.NetworkUtils.getNetworkType
 import com.example.oil_forecast.Utils.NetworkUtils.isNetworkConnected
 import com.example.oil_forecast.databinding.ActivityMainBinding
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
@@ -25,6 +30,10 @@ class MainActivity :
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
 
+    companion object {
+        private const val LOCATION_PERMISSION_REQUEST_CODE = 1
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -32,6 +41,69 @@ class MainActivity :
         checkNetworkStatus()
         observeNetworkState()
         initView()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        fetchCityName()
+    }
+
+    private fun fetchCityName() {
+        val fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        // 檢查位置權限
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            // 取得最後已知位置
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location ->
+                    if (location != null) {
+                        val latitude = location.latitude
+                        val longitude = location.longitude
+
+                        // 使用你的工具類別來取得城市名稱
+                        val cityName = LocationUtils.getCityFromLocation(this, latitude, longitude)
+
+                        if (cityName != null) {
+                            Log.d("Location", "Current City: $cityName")
+                            // 儲存城市名稱
+                            val locationPref = LocationPref(this)
+                            locationPref.saveLocation(cityName)
+                        } else {
+                            Log.d("Location", "City not found")
+                        }
+                    } else {
+                        Log.d("Location", "Last location is null")
+                    }
+                }
+                .addOnFailureListener { e ->
+                    Log.e("Location", "Error getting location", e)
+                }
+        } else {
+            // 如果沒有權限，你需要向使用者請求權限
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray,
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, fetch the city name
+                fetchCityName()
+            } else {
+                // Permission denied. Show a message to the user.
+                Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show()
+                Log.d("Location", "Location permission denied by user")
+            }
+        }
     }
 
     private fun observeNetworkState() {

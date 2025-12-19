@@ -26,7 +26,7 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="空氣品質"
+                android:text="@string/air_quality"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -72,7 +72,7 @@
                 app:layout_constraintTop_toBottomOf="@id/progress_tv"
                 app:layout_constraintStart_toStartOf="@id/circular_determinative_pb"
                 app:layout_constraintEnd_toEndOf="@id/circular_determinative_pb"
-                tools:text="良好"
+                tools:text="@string/good"
                 android:layout_marginTop="4dp"/>
 
             <!-- 汙染物區塊 -->

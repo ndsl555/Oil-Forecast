@@ -13,12 +13,14 @@
 
 
     <fragment
+        android:label="@string/weather_forecast"
         android:id="@+id/navigationWeatherFragment"
         android:name="com.example.oil_forecast.WeatherFragment"
         tools:layout="@layout/fragment_weather"
         />
 
     <fragment
+        android:label="@string/air_quality"
         android:id="@+id/navigationAQIFragment"
         android:name="com.example.oil_forecast.AQIFragment"
         tools:layout="@layout/fragment_aqi" >
@@ -30,7 +32,7 @@
     <fragment
         android:id="@+id/aqiListFragment"
         android:name="com.example.oil_forecast.AqiListFragment"
-        android:label="fragment_aqi_list" />
+        android:label="@string/list_overview" />
 
 
 

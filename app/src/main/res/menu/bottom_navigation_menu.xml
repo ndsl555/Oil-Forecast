@@ -3,14 +3,14 @@
     <item
         android:icon="@drawable/aqi"
         android:id="@+id/navigation_aqi"
-        android:title="AQI" />
+        android:title="@string/air_quality" />
     <item
         android:icon="@drawable/weather"
         android:id="@+id/navigation_weather"
-        android:title="Weather" />
-    <item
-        android:icon="@drawable/oil"
-        android:id="@+id/navigation_oil"
-        android:title="Oil" />
+        android:title="@string/weather_forecast" />
+<!--    <item-->
+<!--        android:icon="@drawable/oil"-->
+<!--        android:id="@+id/navigation_oil"-->
+<!--        android:title="@string/oil" />-->
 
 </menu>

@@ -8,5 +8,8 @@ data class ForecastEntity(
     val maxTemp: Int?,
     val minTemp: Int?,
     val pop: Int?,
-    val weather: String?,
+    val relativeHumidity: String?,
+    val windSpeed: String?,
+    val windDirection: String?,
+    val uVExposureLevel: String?,
 )

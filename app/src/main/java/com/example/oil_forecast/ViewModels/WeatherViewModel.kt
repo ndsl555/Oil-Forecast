@@ -3,6 +3,7 @@ package com.example.oil_forecast.ViewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.oil_forecast.Entity.ForecastEntity
+import com.example.oil_forecast.Entity.LocationEntity
 import com.example.oil_forecast.UseCase.FetchForeCastByGeoUseCase
 import com.example.oil_forecast.UseCase.FetchLocationUseCase
 import com.example.oil_forecast.Utils.Result
@@ -16,8 +17,8 @@ class WeatherViewModel(
     private val fetchLocationUseCase: FetchLocationUseCase,
     private val fetchForeCastByGeoUseCase: FetchForeCastByGeoUseCase,
 ) : ViewModel() {
-    private val _locations = MutableStateFlow<List<Pair<String, String>>>(emptyList())
-    val locations: StateFlow<List<Pair<String, String>>> = _locations.asStateFlow()
+    private val _locations = MutableStateFlow<List<LocationEntity>>(emptyList())
+    val locations: StateFlow<List<LocationEntity>> = _locations.asStateFlow()
 
     private val _forecast = MutableStateFlow<List<ForecastEntity>>(emptyList())
     val forecast: StateFlow<List<ForecastEntity>> = _forecast
@@ -31,8 +32,8 @@ class WeatherViewModel(
             when (res) {
                 is Result.Success -> {
                     println("長度" + res.data.size)
-                    // 轉成只要鄉鎮名稱的 List<String>
-                    _locations.value = res.data.map { it.locationName to it.geocode }
+                    // 直接提供 LocationEntity 列表
+                    _locations.value = res.data
                 }
                 is Result.Error -> {
 //                    println()

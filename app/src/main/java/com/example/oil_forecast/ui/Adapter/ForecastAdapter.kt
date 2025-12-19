@@ -2,6 +2,8 @@ package com.example.oil_forecast.ui.Adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.oil_forecast.Entity.ForecastEntity
 import com.example.oil_forecast.databinding.ItemForecastBinding
@@ -9,15 +11,7 @@ import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
 class ForecastAdapter :
-    RecyclerView.Adapter<ForecastAdapter.VH>() {
-    private val data = mutableListOf<ForecastEntity>()
-
-    fun submit(list: List<ForecastEntity>) {
-        data.clear()
-        data.addAll(list)
-        notifyDataSetChanged()
-    }
-
+    ListAdapter<ForecastEntity, ForecastAdapter.VH>(DiffCallback) {
     inner class VH(val binding: ItemForecastBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -38,23 +32,29 @@ class ForecastAdapter :
         holder: VH,
         position: Int,
     ) {
-        val item = data[position]
+        val item = getItem(position)
 
-        holder.binding.textdate.text =
+        holder.binding.textDate.text =
             "${formatTime(item.startTime)} ~ ${formatTime(item.endTime)}"
 
         println("${formatTime(item.startTime)} ~ ${formatTime(item.endTime)}")
-        holder.binding.texttem.text =
-            "溫度：${item.minTemp ?: "--"} ~ ${item.maxTemp ?: "--"}°C"
+        holder.binding.textTemp.text =
+            "${item.minTemp ?: "--"} ~ ${item.maxTemp ?: "--"}°C"
 
-        holder.binding.textrain.text =
-            "降雨：${item.pop?.let { "$it%" } ?: "--"}"
+        holder.binding.textRain.text =
+            "${item.pop?.let { "$it%" } ?: "--"}"
 
-        holder.binding.textfeel.text =
-            "天氣：${item.weather ?: "--"}"
+        holder.binding.textWind.text =
+            "${item.windDirection + item.windSpeed + "級" ?: "--"}"
 
-        holder.binding.texthumid.text =
-            "平均：${item.avgTemp ?: "--"}°C"
+        holder.binding.textUV.text =
+            "${item.uVExposureLevel ?: "--"}"
+
+        holder.binding.circularDeterminativePb.progress =
+            (item.relativeHumidity?.toInt() ?: 0) * 100 / 100
+
+        holder.binding.progressTv.text =
+            item.relativeHumidity?.let { "$it%" } ?: "--"
     }
 
     fun formatTime(time: String): String {
@@ -71,5 +71,15 @@ class ForecastAdapter :
         }
     }
 
-    override fun getItemCount() = data.size
+    companion object DiffCallback : DiffUtil.ItemCallback<ForecastEntity>() {
+        override fun areItemsTheSame(
+            oldItem: ForecastEntity,
+            newItem: ForecastEntity,
+        ): Boolean = oldItem.startTime == newItem.startTime && oldItem.endTime == newItem.endTime
+
+        override fun areContentsTheSame(
+            oldItem: ForecastEntity,
+            newItem: ForecastEntity,
+        ): Boolean = oldItem == newItem
+    }
 }

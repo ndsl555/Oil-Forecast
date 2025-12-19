@@ -66,7 +66,7 @@ class AqiListFragment : Fragment() {
             AqiAdapter { item ->
                 AQIDetailFragment
                     .newInstance(item)
-                    .show(parentFragmentManager, "forecast_dialog")
+                    .show(parentFragmentManager, getString(R.string.forecast_dialog_tag))
             }
         binding.rvAqiList.apply {
             layoutManager = LinearLayoutManager(context)

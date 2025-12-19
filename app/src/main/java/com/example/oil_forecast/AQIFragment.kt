@@ -51,12 +51,12 @@ class AQIFragment : Fragment() {
     private fun initParam() {
         launchAndRepeatWithViewLifecycle {
             viewModel.aqiSortList.collect { locations ->
-                binding.title1.text = "NO.1 ${locations.getOrNull(0) ?: "-"}"
-                binding.title2.text = "NO.2 ${locations.getOrNull(1) ?: "-"}"
-                binding.title3.text = "NO.3 ${locations.getOrNull(2) ?: "-"}"
-                binding.title4.text = "NO.1 ${locations.getOrNull(3) ?: "-"}"
-                binding.title5.text = "NO.2 ${locations.getOrNull(4) ?: "-"}"
-                binding.title6.text = "NO.3 ${locations.getOrNull(5) ?: "-"}"
+                binding.title1.text = getString(R.string.no_1_display, locations.getOrNull(0) ?: getString(R.string.empty_dash))
+                binding.title2.text = getString(R.string.no_2_display, locations.getOrNull(1) ?: getString(R.string.empty_dash))
+                binding.title3.text = getString(R.string.no_3_display, locations.getOrNull(2) ?: getString(R.string.empty_dash))
+                binding.title4.text = getString(R.string.no_1_display, locations.getOrNull(3) ?: getString(R.string.empty_dash))
+                binding.title5.text = getString(R.string.no_2_display, locations.getOrNull(4) ?: getString(R.string.empty_dash))
+                binding.title6.text = getString(R.string.no_3_display, locations.getOrNull(5) ?: getString(R.string.empty_dash))
             }
         }
     }

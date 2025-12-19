@@ -91,7 +91,10 @@ class ForeCastRemoteDataSource(
                             maxTemp = null,
                             minTemp = null,
                             pop = null,
-                            weather = null,
+                            relativeHumidity = null,
+                            windSpeed = null,
+                            windDirection = null,
+                            uVExposureLevel = null,
                         )
                     }
 
@@ -119,9 +122,23 @@ class ForeCastRemoteDataSource(
                                 pop = value["ProbabilityOfPrecipitation"]?.takeIf { it != "-" }?.toInt(),
                             )
 
-                        "天氣現象" ->
+                        "平均相對濕度" ->
                             base.copy(
-                                weather = value["Weather"],
+                                relativeHumidity = value["RelativeHumidity"],
+                            )
+
+                        "風速" ->
+                            base.copy(
+                                windSpeed = value["WindSpeed"],
+                            )
+
+                        "風向" ->
+                            base.copy(
+                                windDirection = value["WindDirection"],
+                            )
+                        "紫外線指數" ->
+                            base.copy(
+                                uVExposureLevel = value["UVExposureLevel"],
                             )
 
                         else -> base

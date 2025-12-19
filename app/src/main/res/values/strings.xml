@@ -21,4 +21,8 @@
     <string name="no_2_display">NO.2 %1$s</string>
     <string name="no_3_display">NO.3 %1$s</string>
     <string name="forecast_dialog_tag">forecast_dialog</string>
+    <string name="network_type_wifi">WiFi</string>
+    <string name="network_type_mobile">Mobile</string>
+    <string name="network_type_no_network">請檢察網路連線狀態</string>
+    <string name="yes">知道了</string>
 </resources>

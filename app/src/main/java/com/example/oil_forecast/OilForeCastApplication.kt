@@ -1,6 +1,7 @@
 package com.example.oil_forecast
 
 import android.app.Application
+import com.example.oil_forecast.Utils.NetworkUtils
 import com.example.oil_forecast.di.dataModule
 import com.example.oil_forecast.di.ioDispatcherModule
 import com.example.oil_forecast.di.moshiModule
@@ -12,6 +13,7 @@ import org.koin.core.context.startKoin
 class OilForeCastApplication : Application() {
     override fun onCreate() {
         super.onCreate()
+        NetworkUtils.initialize(this)
         startKoin {
             androidContext(this@OilForeCastApplication)
             modules(

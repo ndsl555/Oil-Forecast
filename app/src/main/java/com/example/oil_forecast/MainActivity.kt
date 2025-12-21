@@ -21,7 +21,6 @@ import com.example.oil_forecast.Utils.NetworkUtils.isNetworkConnected
 import com.example.oil_forecast.databinding.ActivityMainBinding
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
 
 class MainActivity :
@@ -142,14 +141,7 @@ class MainActivity :
     }
 
     private fun showNoWifiDialog() {
-        MaterialAlertDialogBuilder(this)
-            .setTitle(getString(android.R.string.dialog_alert_title))
-            .setMessage(getString(R.string.network_type_no_network))
-            .setCancelable(false)
-            .setPositiveButton(getString(R.string.yes)) { dialog, _ ->
-                dialog.dismiss()
-            }
-            .show()
+        NoNetworkDialogFragment().show(supportFragmentManager, "NoNetworkDialogFragment")
     }
 
     private fun initView() {

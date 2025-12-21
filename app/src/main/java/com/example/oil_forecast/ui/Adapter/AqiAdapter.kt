@@ -69,7 +69,7 @@ class AqiAdapter(
     ) {
         when (val listItem = data[position]) {
             is AqiListItem.HeaderItem -> {
-                (holder as HeaderViewHolder).binding.headerText.text = "${listItem.status} (${listItem.count})"
+                (holder as HeaderViewHolder).binding.headerText.text = listItem.status.ifEmpty { "--" } + " (${listItem.count})"
             }
             is AqiListItem.AqiItem -> {
                 val itemViewHolder = holder as ItemViewHolder

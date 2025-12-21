@@ -13,6 +13,8 @@ import com.example.oil_forecast.Extension.launchAndRepeatWithViewLifecycle
 import com.example.oil_forecast.ViewModels.AQIViewModel
 import com.example.oil_forecast.databinding.FragmentAqiListBinding
 import com.example.oil_forecast.ui.Adapter.AqiAdapter
+import com.example.oil_forecast.ui.Adapter.AqiListItem
+import com.example.oil_forecast.ui.Decorator.CustomDividerItemDecoration
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AqiListFragment : Fragment() {
@@ -71,13 +73,42 @@ class AqiListFragment : Fragment() {
         binding.rvAqiList.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = aqiAdapter
+            addItemDecoration(CustomDividerItemDecoration(requireContext()))
+        }
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.fetchAQIs()
         }
     }
 
     private fun initObservers() {
         launchAndRepeatWithViewLifecycle {
             viewModel.aqiAllLocations.collect { locations ->
-                aqiAdapter.submit(locations)
+                if (locations.isEmpty()) {
+                    aqiAdapter.submit(emptyList())
+                    return@collect
+                }
+
+                val groupedData = mutableListOf<AqiListItem>()
+                val countsByStatus = locations.groupingBy { it.status }.eachCount()
+
+                var currentStatus: String? = null
+                var rank = 1
+                locations.forEach { aqiEntity ->
+                    if (aqiEntity.status != currentStatus) {
+                        currentStatus = aqiEntity.status
+                        countsByStatus[currentStatus]?.let {
+                            groupedData.add(AqiListItem.HeaderItem(currentStatus!!, it))
+                        }
+                    }
+                    groupedData.add(AqiListItem.AqiItem(aqiEntity, rank++))
+                }
+                aqiAdapter.submit(groupedData)
+            }
+        }
+
+        launchAndRepeatWithViewLifecycle {
+            viewModel.isLoading.collect { isLoading ->
+                binding.swipeRefreshLayout.isRefreshing = isLoading
             }
         }
     }

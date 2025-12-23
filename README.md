@@ -1,4 +1,4 @@
-# OIl-Forecast
+# AQI-Forecast
 
 一款結合空氣品質跟氣象預報的app。
 

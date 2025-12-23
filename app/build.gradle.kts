@@ -46,6 +46,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.kotlinx.coroutines.play.services)
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
     implementation(libs.zxing.core)
@@ -75,6 +76,7 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging.interceptor)
     implementation(libs.androidx.camera.core)
+    implementation(libs.androidx.work.runtime.ktx)
     ksp(libs.moshi.kotlin.codegen) //  注意是 kapt，不是 implementation
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

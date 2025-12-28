@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
@@ -41,7 +40,6 @@ class MainActivity :
         checkNetworkStatus()
         observeNetworkState()
         initView()
-        checkAndRequestPermissions()
     }
 
     override fun onResume() {
@@ -104,22 +102,6 @@ class MainActivity :
                 Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show()
                 Log.d("Location", "Location permission denied by user")
             }
-        }
-    }
-
-    private fun checkAndRequestPermissions() {
-        val permissionsToRequest = mutableListOf<String>()
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-            permissionsToRequest.add(Manifest.permission.POST_NOTIFICATIONS)
-        }
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            permissionsToRequest.add(Manifest.permission.ACCESS_FINE_LOCATION)
-        }
-
-        if (permissionsToRequest.isNotEmpty()) {
-            ActivityCompat.requestPermissions(this, permissionsToRequest.toTypedArray(), LOCATION_PERMISSION_REQUEST_CODE)
         }
     }
 

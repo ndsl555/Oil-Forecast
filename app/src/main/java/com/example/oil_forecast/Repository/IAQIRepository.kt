@@ -5,9 +5,4 @@ import com.example.oil_forecast.Utils.Result
 
 interface IAQIRepository {
     suspend fun getAllAQIData(): Result<List<AQIEntity>>
-
-    suspend fun getAqiByLocation(
-        latitude: Double,
-        longitude: Double,
-    ): Result<AQIEntity>
 }

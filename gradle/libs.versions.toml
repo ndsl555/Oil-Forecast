@@ -1,7 +1,6 @@
 [versions]
 agp = "8.13.0"
 kotlin = "2.2.0"
-kotlinxCoroutinesPlayServices = "1.10.2"
 maps = "18.2.0"
 coreKtx = "1.10.1"
 junit = "4.13.2"
@@ -29,12 +28,9 @@ lifecycleLivedataKtx = "2.10.0"
 lifecycleViewmodelKtx = "2.10.0"
 fragmentKtx = "1.8.9"
 gridlayout = "1.1.0"
-workRuntimeKtx = "2.11.0"
 
 [libraries]
 
-androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "workRuntimeKtx" }
-kotlinx-coroutines-play-services = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services", version.ref = "kotlinxCoroutinesPlayServices" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 zxing-core = { group = "com.google.zxing", name = "core", version = "3.4.1" }

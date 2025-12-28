@@ -77,7 +77,7 @@ class AqiAdapter(
                 itemViewHolder.binding.tvRank.text = listItem.rank.toString()
                 itemViewHolder.binding.tvCountry.text = aqiEntity.county
                 itemViewHolder.binding.tvSiteName.text = aqiEntity.siteName
-                itemViewHolder.binding.tvAqiValue.text = aqiEntity.aqi.toString()
+                itemViewHolder.binding.tvAqiValue.text = aqiEntity.aqi?.toString() ?: "--"
 
                 val context = itemViewHolder.itemView.context
                 val color =

@@ -95,6 +95,8 @@ class ForeCastRemoteDataSource(
                             windSpeed = null,
                             windDirection = null,
                             uVExposureLevel = null,
+                            uVIndex = null,
+                            dewPoint = null,
                         )
                     }
 
@@ -139,6 +141,11 @@ class ForeCastRemoteDataSource(
                         "紫外線指數" ->
                             base.copy(
                                 uVExposureLevel = value["UVExposureLevel"],
+                                uVIndex = value["UVIndex"]?.toInt(),
+                            )
+                        "平均露點溫度" ->
+                            base.copy(
+                                dewPoint = value["DewPoint"]?.toInt(),
                             )
 
                         else -> base

@@ -1,3 +1,4 @@
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -75,6 +76,8 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging.interceptor)
     implementation(libs.androidx.camera.core)
+    implementation(libs.mpandroidchart)
+    implementation(libs.androidx.cardview)
     ksp(libs.moshi.kotlin.codegen) //  注意是 kapt，不是 implementation
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

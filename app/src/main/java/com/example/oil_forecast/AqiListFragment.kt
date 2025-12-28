@@ -15,6 +15,7 @@ import com.example.oil_forecast.databinding.FragmentAqiListBinding
 import com.example.oil_forecast.ui.Adapter.AqiAdapter
 import com.example.oil_forecast.ui.Adapter.AqiListItem
 import com.example.oil_forecast.ui.Decorator.CustomDividerItemDecoration
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AqiListFragment : Fragment() {
@@ -82,33 +83,34 @@ class AqiListFragment : Fragment() {
 
     private fun initObservers() {
         launchAndRepeatWithViewLifecycle {
-            viewModel.aqiAllLocations.collect { locations ->
-                if (locations.isEmpty()) {
-                    aqiAdapter.submit(emptyList())
-                    return@collect
-                }
-
-                val groupedData = mutableListOf<AqiListItem>()
-                val countsByStatus = locations.groupingBy { it.status }.eachCount()
-
-                var currentStatus: String? = null
-                var rank = 1
-                locations.forEach { aqiEntity ->
-                    if (aqiEntity.status != currentStatus) {
-                        currentStatus = aqiEntity.status
-                        countsByStatus[currentStatus]?.let {
-                            groupedData.add(AqiListItem.HeaderItem(currentStatus!!, it))
-                        }
+            launch {
+                viewModel.aqiAllLocations.collect { locations ->
+                    if (locations.isEmpty()) {
+                        aqiAdapter.submit(emptyList())
+                        return@collect
                     }
-                    groupedData.add(AqiListItem.AqiItem(aqiEntity, rank++))
-                }
-                aqiAdapter.submit(groupedData)
-            }
-        }
 
-        launchAndRepeatWithViewLifecycle {
-            viewModel.isLoading.collect { isLoading ->
-                binding.swipeRefreshLayout.isRefreshing = isLoading
+                    val groupedData = mutableListOf<AqiListItem>()
+                    val countsByStatus = locations.groupingBy { it.status }.eachCount()
+
+                    var currentStatus: String? = null
+                    var rank = 1
+                    locations.forEach { aqiEntity ->
+                        if (aqiEntity.status != currentStatus) {
+                            currentStatus = aqiEntity.status
+                            countsByStatus[currentStatus]?.let {
+                                groupedData.add(AqiListItem.HeaderItem(currentStatus!!, it))
+                            }
+                        }
+                        groupedData.add(AqiListItem.AqiItem(aqiEntity, rank++))
+                    }
+                    aqiAdapter.submit(groupedData)
+                }
+            }
+            launch {
+                viewModel.isLoading.collect { isLoading ->
+                    binding.swipeRefreshLayout.isRefreshing = isLoading
+                }
             }
         }
     }

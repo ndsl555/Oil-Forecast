@@ -12,4 +12,6 @@ data class ForecastEntity(
     val windSpeed: String?,
     val windDirection: String?,
     val uVExposureLevel: String?,
+    val uVIndex: Int?,
+    val dewPoint: Int?,
 )

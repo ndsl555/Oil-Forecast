@@ -33,7 +33,7 @@ class AQIDetailFragment : DialogFragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
 
-        geocode = requireArguments().getParcelable(ARG_GEOCODE)!!
+        geocode = requireArguments().getParcelable(ARG_AQIITEM)!!
 
         initView()
     }
@@ -43,42 +43,42 @@ class AQIDetailFragment : DialogFragment() {
         bindAQI(geocode.county + geocode.siteName, geocode.aqi, geocode.status)
 
         bindPollution(
-            title = "PM2.5",
+            title = "PM2.5 (μg/m³)",
             value = geocode.pm2_5,
             itemView = binding.itemPm25,
             type = PollutionType.PM25,
         )
 
         bindPollution(
-            title = "PM10",
+            title = "PM10 (μg/m³)",
             value = geocode.pm10,
             itemView = binding.itemPm10,
             type = PollutionType.PM10,
         )
 
         bindPollution(
-            title = "O₃",
+            title = "O₃ (μg/m³)",
             value = geocode.o3,
             itemView = binding.itemO3,
             type = PollutionType.O3,
         )
 
         bindPollution(
-            title = "NO₂",
+            title = "NO₂ (μg/m³)",
             value = geocode.no2,
             itemView = binding.itemNo2,
             type = PollutionType.NO2,
         )
 
         bindPollution(
-            title = "CO",
+            title = "CO (μg/m³)",
             value = geocode.co,
             itemView = binding.itemCo,
             type = PollutionType.CO,
         )
 
         bindPollution(
-            title = "SO₂",
+            title = "SO₂ (μg/m³)",
             value = geocode.so2,
             itemView = binding.itemSo2,
             type = PollutionType.SO2,
@@ -149,11 +149,11 @@ class AQIDetailFragment : DialogFragment() {
     }
 
     companion object {
-        private const val ARG_GEOCODE = "arg_geocode"
+        private const val ARG_AQIITEM = "arg_aqiItem"
 
         fun newInstance(geocode: AQIEntity) =
             AQIDetailFragment().apply {
-                arguments = bundleOf(ARG_GEOCODE to geocode)
+                arguments = bundleOf(ARG_AQIITEM to geocode)
             }
     }
 }

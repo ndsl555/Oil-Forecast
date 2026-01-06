@@ -99,7 +99,7 @@ class AqiListFragment : Fragment() {
                         if (aqiEntity.status != currentStatus) {
                             currentStatus = aqiEntity.status
                             countsByStatus[currentStatus]?.let {
-                                groupedData.add(AqiListItem.HeaderItem(currentStatus!!, it))
+                                groupedData.add(AqiListItem.HeaderItem(currentStatus, it))
                             }
                         }
                         groupedData.add(AqiListItem.AqiItem(aqiEntity, rank++))

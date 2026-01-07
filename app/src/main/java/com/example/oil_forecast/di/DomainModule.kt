@@ -9,5 +9,6 @@ val domainModule =
         factory { FetchLocationUseCase(get(), get(koinIO)) }
         factory { FetchForeCastByGeoUseCase(get(), get(koinIO)) }
         factory { FetchAQIUseCase(get(), get(koinIO)) }
+        factory { FetchAQIByLocationUseCase(get(), get(koinIO)) }
         factory { FetchOilPriceUseCase(get(), get(koinIO)) }
     }

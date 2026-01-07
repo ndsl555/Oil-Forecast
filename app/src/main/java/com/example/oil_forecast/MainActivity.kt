@@ -59,9 +59,13 @@ class MainActivity :
             // 取得最後已知位置
             fusedLocationClient.lastLocation
                 .addOnSuccessListener { location ->
+                    val locationPref = LocationPref(this)
+
                     if (location != null) {
                         val latitude = location.latitude
                         val longitude = location.longitude
+                        Log.d("Location", "Latitude: $latitude, Longitude: $longitude")
+                        locationPref.saveLatLng(latitude, longitude)
 
                         // 使用你的工具類別來取得城市名稱
                         val cityName = LocationUtils.getCityFromLocation(this, latitude, longitude)
@@ -69,7 +73,6 @@ class MainActivity :
                         if (cityName != null) {
                             Log.d("Location", "Current City: $cityName")
                             // 儲存城市名稱
-                            val locationPref = LocationPref(this)
                             locationPref.saveLocation(cityName)
                         } else {
                             Log.d("Location", "City not found")

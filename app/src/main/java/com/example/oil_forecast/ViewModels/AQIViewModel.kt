@@ -3,6 +3,7 @@ package com.example.oil_forecast.ViewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.oil_forecast.Entity.AQIEntity
+import com.example.oil_forecast.UseCase.FetchAQIByLocationUseCase
 import com.example.oil_forecast.UseCase.FetchAQIUseCase
 import com.example.oil_forecast.Utils.Result
 import com.example.oil_forecast.Utils.invoke
@@ -14,11 +15,40 @@ import kotlinx.coroutines.launch
 
 class AQIViewModel(
     private val fetchAQIUseCase: FetchAQIUseCase,
+    private val fetchAQIByLocationUseCase: FetchAQIByLocationUseCase,
 ) : ViewModel() {
-    private val _aqiSortList = MutableStateFlow<List<String>>(emptyList())
-    val aqiSortList: StateFlow<List<String>> = _aqiSortList.asStateFlow()
+    private val _currentAqi =
+        MutableStateFlow(
+            AQIEntity(
+                siteName = "",
+                county = "",
+                aqi = null,
+                pollutant = "",
+                status = "",
+                so2 = null,
+                co = null,
+                o3 = null,
+                o3_8hr = null,
+                pm10 = null,
+                pm2_5 = null,
+                no2 = null,
+                nox = null,
+                no = null,
+                windSpeed = null,
+                windDirec = null,
+                publishTime = "",
+                co_8hr = null,
+                pm2_5_avg = null,
+                pm10_avg = null,
+                so2_avg = null,
+                longitude = 0.0,
+                latitude = 0.0,
+                siteId = "",
+            ),
+        )
+    val currentAqi: StateFlow<AQIEntity> = _currentAqi.asStateFlow()
 
-    //  給地圖用
+    //  給列表全覽用
     private val _aqiAllLocations = MutableStateFlow<List<AQIEntity>>(emptyList())
     val aqiAllLocations: StateFlow<List<AQIEntity>> = _aqiAllLocations.asStateFlow()
 
@@ -27,6 +57,24 @@ class AQIViewModel(
 
     init {
         fetchAQIs()
+    }
+
+    fun fetchAQIByLocation(
+        lat: Double,
+        lng: Double,
+    ) {
+        viewModelScope.launch {
+            val res = fetchAQIByLocationUseCase.invoke(FetchAQIByLocationUseCase.Params(lat, lng))
+            when (res) {
+                is Result.Success -> {
+                    val sortedData = res.data
+                    _currentAqi.value = sortedData
+                }
+                is Result.Error -> {
+                    println("AQI fetch error: ${res.exception}")
+                }
+            }
+        }
     }
 
     fun sortByAscending() {
@@ -47,10 +95,6 @@ class AQIViewModel(
                     is Result.Success -> {
                         val sortedData = res.data.sortedBy { it.aqi }
                         _aqiAllLocations.value = sortedData
-                        val firstPart = sortedData.subList(1, minOf(4, sortedData.size))
-                        val lastPart = sortedData.takeLast(3)
-                        val combined = firstPart + lastPart.reversed()
-                        _aqiSortList.value = combined.map { it.county + "" + it.siteName }
                     }
                     is Result.Error -> {
                         println("AQI fetch error: ${res.exception}")

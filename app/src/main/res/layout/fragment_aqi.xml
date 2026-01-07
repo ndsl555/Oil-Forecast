@@ -1,191 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#ADD8E6"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical"
-    android:gravity="center">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/todays_top_3_air_quality"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18sp"
-        android:textStyle="bold"></TextView>
+    tools:context=".AQIDetailFragment">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:id="@+id/cardView"
+        android:layout_width="384dp"
+        android:layout_height="528dp"
         app:cardCornerRadius="20dp"
-        app:cardElevation="10dp"
-        app:contentPadding="10dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:id="@+id/layout1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- 標題 -->
             <TextView
-                android:id="@+id/title1"
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/no_1"
-                android:textSize="17sp"
+                android:text="@string/air_quality"
+                android:textSize="26sp"
                 android:textStyle="bold"
-                android:textColor="@color/purple_500"
-                />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="10dp"
-        app:contentPadding="10dp">
+            <!-- 圓形 AQI -->
+            <ProgressBar
+                android:id="@+id/circular_determinative_pb"
+                android:layout_width="337dp"
+                android:layout_height="265dp"
+                android:layout_marginTop="12dp"
+                android:indeterminateOnly="false"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@drawable/pb_circular_determinative"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView" />
 
-        <LinearLayout
-            android:id="@+id/layout2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            >
+            <!-- AQI 狀態 -->
+
             <TextView
-                android:id="@+id/title2"
+                android:id="@+id/progress_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/no_2"
-                android:textSize="17sp"
+                android:textSize="24sp"
                 android:textStyle="bold"
-                android:textColor="@color/purple_500"
-                />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="10dp"
-        app:contentPadding="10dp">
+                app:layout_constraintBottom_toBottomOf="@id/circular_determinative_pb"
+                app:layout_constraintEnd_toEndOf="@id/circular_determinative_pb"
+                app:layout_constraintHorizontal_bias="0.502"
+                app:layout_constraintStart_toStartOf="@id/circular_determinative_pb"
+                app:layout_constraintTop_toTopOf="@id/circular_determinative_pb"
+                app:layout_constraintVertical_bias="0.402"
+                tools:text="50" />
 
-        <LinearLayout
-            android:id="@+id/layout3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            >
             <TextView
-                android:id="@+id/title3"
+                android:id="@+id/status_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/no_3"
-                android:textSize="17sp"
+                android:layout_marginTop="4dp"
+                android:textSize="24sp"
                 android:textStyle="bold"
-                android:textColor="@color/purple_500"
-                />
+                app:layout_constraintEnd_toEndOf="@id/circular_determinative_pb"
+                app:layout_constraintStart_toStartOf="@id/circular_determinative_pb"
+                app:layout_constraintTop_toBottomOf="@id/progress_tv"
+                tools:text="@string/good" />
 
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/todays_worst_3_air_quality"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        ></TextView>
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="10dp"
-        app:contentPadding="10dp">
+            <!-- 汙染物區塊 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/pollutionContainer"
+                android:layout_width="352dp"
+                android:layout_height="194dp"
+                android:padding="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/circular_determinative_pb"
+                app:layout_constraintVertical_bias="0.0">
 
-        <LinearLayout
-            android:id="@+id/layout4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            >
-            <TextView
-                android:id="@+id/title4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/no_1"
-                android:textSize="17sp"
-                android:textStyle="bold"
-                android:textColor="@color/purple_500"
-                />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                <!-- 第一排 -->
+                <include
+                    android:id="@+id/item_pm25"
+                    layout="@layout/item_pollution"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    app:layout_constraintEnd_toStartOf="@id/item_pm10"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.5" />
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="10dp"
-        app:contentPadding="10dp">
+                <include
+                    android:id="@+id/item_pm10"
+                    layout="@layout/item_pollution"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/item_pm25"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.5" />
 
-        <LinearLayout
-            android:id="@+id/layout5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            >
-            <TextView
-                android:id="@+id/title5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/no_2"
-                android:textSize="17sp"
-                android:textStyle="bold"
-                android:textColor="@color/purple_500"
-                />
+                <!-- 第二排 -->
+                <include
+                    android:id="@+id/item_no2"
+                    layout="@layout/item_pollution"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
 
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                    android:layout_marginEnd="4dp"
+                    app:layout_constraintEnd_toStartOf="@id/item_o3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/item_pm25"
+                    app:layout_constraintWidth_percent="0.5" />
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="10dp"
-        app:contentPadding="10dp">
+                <include
+                    android:id="@+id/item_o3"
+                    layout="@layout/item_pollution"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/item_no2"
+                    app:layout_constraintTop_toBottomOf="@id/item_pm10"
+                    app:layout_constraintWidth_percent="0.5" />
 
-        <LinearLayout
-            android:id="@+id/layout6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            >
-            <TextView
-                android:id="@+id/title6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/no_3"
-                android:textSize="17sp"
-                android:textStyle="bold"
-                android:textColor="@color/purple_500"
-                />
+                <!-- 第三排 -->
+                <include
+                    android:id="@+id/item_co"
+                    layout="@layout/item_pollution"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
 
-        </LinearLayout>
+                    android:layout_marginEnd="4dp"
+                    app:layout_constraintEnd_toStartOf="@id/item_so2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/item_no2"
+                    app:layout_constraintWidth_percent="0.5" />
+
+                <include
+                    android:id="@+id/item_so2"
+                    layout="@layout/item_pollution"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/item_co"
+                    app:layout_constraintTop_toBottomOf="@id/item_o3"
+                    app:layout_constraintWidth_percent="0.5" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <Button
@@ -195,5 +171,11 @@
         android:text="@string/full_list_view"
         android:textColor="@android:color/white"
         android:textSize="18dp"
-        android:textStyle="bold" />
-</LinearLayout>
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

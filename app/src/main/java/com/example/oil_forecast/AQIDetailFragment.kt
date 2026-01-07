@@ -12,7 +12,7 @@ import com.example.oil_forecast.Entity.AQIEntity
 import com.example.oil_forecast.databinding.FragmentDetailDialogBinding
 import com.example.oil_forecast.databinding.ItemPollutionBinding
 
-class AQIDetailFragment : DialogFragment() {
+class AQIDetailFragment : DialogFragment(), View.OnClickListener {
     private var _binding: FragmentDetailDialogBinding? = null
     private val binding get() = _binding!!
 
@@ -39,6 +39,7 @@ class AQIDetailFragment : DialogFragment() {
     }
 
     private fun initView() {
+        binding.floatingActionButton.setOnClickListener(this)
         Toast.makeText(requireContext(), "更新時間 ${geocode.publishTime}", Toast.LENGTH_SHORT).show()
         bindAQI(geocode.county + geocode.siteName, geocode.aqi, geocode.status)
 
@@ -118,7 +119,7 @@ class AQIDetailFragment : DialogFragment() {
     /**
      * 共用污染物顯示邏輯
      */
-    private fun bindPollution(
+    fun bindPollution(
         title: String,
         value: Double?,
         itemView: ItemPollutionBinding,
@@ -148,6 +149,12 @@ class AQIDetailFragment : DialogFragment() {
         _binding = null
     }
 
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.floatingActionButton -> dismiss()
+        }
+    }
+
     companion object {
         private const val ARG_AQIITEM = "arg_aqiItem"
 
@@ -156,78 +163,4 @@ class AQIDetailFragment : DialogFragment() {
                 arguments = bundleOf(ARG_AQIITEM to geocode)
             }
     }
-}
-
-enum class PollutionType {
-    PM25 {
-        override fun getStatus(value: Double) =
-            when {
-                value <= 15 -> "良好" to R.color.aqi_green
-                value <= 35 -> "普通" to R.color.aqi_yellow
-                value <= 54 -> "對敏感族群不健康" to R.color.aqi_orange
-                value <= 150 -> "對所有族群不健康" to R.color.aqi_red
-                value <= 250 -> "非常不健康" to R.color.aqi_purple
-                else -> "危害" to R.color.aqi_brown
-            }
-    },
-
-    PM10 {
-        override fun getStatus(value: Double) =
-            when {
-                value <= 50 -> "良好" to R.color.aqi_green
-                value <= 100 -> "普通" to R.color.aqi_yellow
-                value <= 254 -> "對敏感族群不健康" to R.color.aqi_orange
-                value <= 354 -> "對所有族群不健康" to R.color.aqi_red
-                value <= 424 -> "非常不健康" to R.color.aqi_purple
-                else -> "危害" to R.color.aqi_brown
-            }
-    },
-
-    O3 {
-        override fun getStatus(value: Double) =
-            when {
-                value <= 54 -> "良好" to R.color.aqi_green
-                value <= 70 -> "普通" to R.color.aqi_yellow
-                value <= 85 -> "對敏感族群不健康" to R.color.aqi_orange
-                value <= 105 -> "對所有族群不健康" to R.color.aqi_red
-                value <= 200 -> "非常不健康" to R.color.aqi_purple
-                else -> "危害" to R.color.aqi_brown
-            }
-    },
-
-    NO2 {
-        override fun getStatus(value: Double) =
-            when {
-                value <= 53 -> "良好" to R.color.aqi_green
-                value <= 100 -> "普通" to R.color.aqi_yellow
-                value <= 360 -> "對敏感族群不健康" to R.color.aqi_orange
-                value <= 649 -> "對所有族群不健康" to R.color.aqi_red
-                value <= 1249 -> "非常不健康" to R.color.aqi_purple
-                else -> "危害" to R.color.aqi_brown
-            }
-    },
-    CO {
-        override fun getStatus(value: Double) =
-            when {
-                value <= 4 -> "良好" to R.color.aqi_green
-                value <= 9 -> "普通" to R.color.aqi_yellow
-                value <= 12 -> "對敏感族群不健康" to R.color.aqi_orange
-                value <= 15 -> "對所有族群不健康" to R.color.aqi_red
-                value <= 30 -> "非常不健康" to R.color.aqi_purple
-                else -> "危害" to R.color.aqi_brown
-            }
-    },
-    SO2 {
-        override fun getStatus(value: Double) =
-            when {
-                value <= 35 -> "良好" to R.color.aqi_green
-                value <= 75 -> "普通" to R.color.aqi_yellow
-                value <= 185 -> "對敏感族群不健康" to R.color.aqi_orange
-                value <= 304 -> "對所有族群不健康" to R.color.aqi_red
-                value <= 604 -> "非常不健康" to R.color.aqi_purple
-                else -> "危害" to R.color.aqi_brown
-            }
-    }, ;
-
-    abstract fun getStatus(value: Double): Pair<String, Int>
 }

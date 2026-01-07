@@ -11,6 +11,6 @@ val viewModule: Module =
     module {
         includes(ioDispatcherModule, domainModule, moshiModule)
         viewModel { WeatherViewModel(get(), get()) }
-        viewModel { AQIViewModel(get()) }
+        viewModel { AQIViewModel(get(), get()) }
         viewModel { OilPriceViewModel(get()) }
     }

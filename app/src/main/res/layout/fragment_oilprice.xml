@@ -53,6 +53,11 @@
                         android:text="98"
                         android:textSize="16sp" />
 
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="?android:attr/listDivider" />
+
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -61,6 +66,11 @@
                         android:text="95"
                         android:textSize="16sp" />
 
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="?android:attr/listDivider" />
+
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -68,6 +78,11 @@
                         android:gravity="center"
                         android:text="92"
                         android:textSize="16sp" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="?android:attr/listDivider" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -78,6 +93,16 @@
                         android:textSize="16sp" />
                 </LinearLayout>
 
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="8dp"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/oil_types_layout" />
+
                 <LinearLayout
                     android:id="@+id/oil_prices_layout"
                     android:layout_width="0dp"
@@ -86,7 +111,7 @@
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/oil_types_layout">
+                    app:layout_constraintTop_toBottomOf="@id/divider">
 
                     <TextView
                         android:id="@+id/price_98"
@@ -98,6 +123,11 @@
                         android:textStyle="bold"
                         tools:text="33.5" />
 
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="?android:attr/listDivider" />
+
                     <TextView
                         android:id="@+id/price_95"
                         android:layout_width="0dp"
@@ -108,6 +138,11 @@
                         android:textStyle="bold"
                         tools:text="31.0" />
 
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="?android:attr/listDivider" />
+
                     <TextView
                         android:id="@+id/price_92"
                         android:layout_width="0dp"
@@ -117,6 +152,11 @@
                         android:textSize="18sp"
                         android:textStyle="bold"
                         tools:text="29.5" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="?android:attr/listDivider" />
 
                     <TextView
                         android:id="@+id/price_diesel"
@@ -177,6 +217,11 @@
                         android:text="98"
                         android:textSize="16sp" />
 
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="?android:attr/listDivider" />
+
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -185,6 +230,11 @@
                         android:text="95"
                         android:textSize="16sp" />
 
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="?android:attr/listDivider" />
+
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -192,6 +242,11 @@
                         android:gravity="center"
                         android:text="92"
                         android:textSize="16sp" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="?android:attr/listDivider" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -202,6 +257,16 @@
                         android:textSize="16sp" />
                 </LinearLayout>
 
+                <View
+                    android:id="@+id/divider_fpcc"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="8dp"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/oil_types_layout_fpcc" />
+
                 <LinearLayout
                     android:id="@+id/oil_prices_layout_fpcc"
                     android:layout_width="0dp"
@@ -210,7 +275,7 @@
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/oil_types_layout_fpcc">
+                    app:layout_constraintTop_toBottomOf="@id/divider_fpcc">
 
                     <TextView
                         android:id="@+id/price_98_fpcc"
@@ -222,6 +287,11 @@
                         android:textStyle="bold"
                         tools:text="33.5" />
 
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="?android:attr/listDivider" />
+
                     <TextView
                         android:id="@+id/price_95_fpcc"
                         android:layout_width="0dp"
@@ -232,6 +302,11 @@
                         android:textStyle="bold"
                         tools:text="31.0" />
 
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="?android:attr/listDivider" />
+
                     <TextView
                         android:id="@+id/price_92_fpcc"
                         android:layout_width="0dp"
@@ -241,6 +316,11 @@
                         android:textSize="18sp"
                         android:textStyle="bold"
                         tools:text="29.5" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="?android:attr/listDivider" />
 
                     <TextView
                         android:id="@+id/price_diesel_fpcc"

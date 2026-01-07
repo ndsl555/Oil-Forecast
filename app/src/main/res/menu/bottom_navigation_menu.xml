@@ -8,9 +8,9 @@
         android:icon="@drawable/weather"
         android:id="@+id/navigation_weather"
         android:title="@string/weather_forecast" />
-<!--    <item-->
-<!--        android:icon="@drawable/oil"-->
-<!--        android:id="@+id/navigation_oil"-->
-<!--        android:title="@string/oil" />-->
+    <item
+        android:icon="@drawable/oil"
+        android:id="@+id/navigation_oil"
+        android:title="@string/oil_price" />
 
 </menu>

@@ -1,11 +1,9 @@
 package com.example.oil_forecast.di
 
-import com.example.oil_forecast.DataSource.AQIRemoteDataSource
-import com.example.oil_forecast.DataSource.ForeCastRemoteDataSource
-import com.example.oil_forecast.DataSource.IAQIRemoteDataSource
-import com.example.oil_forecast.DataSource.IForeCastRemoteDataSource
+import com.example.oil_forecast.DataSource.*
 import com.example.oil_forecast.NetWork.AirQualityService
 import com.example.oil_forecast.NetWork.ForeCastService
+import com.example.oil_forecast.NetWork.OilPriceService
 import com.google.gson.GsonBuilder
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -34,6 +32,13 @@ val networkModule =
                 .build()
         }
 
+        single(named("oilPriceRetrofit")) {
+            Retrofit.Builder()
+                .baseUrl("https://gas.goodlife.tw/")
+                .addConverterFactory(GsonConverterFactory.create(get()))
+                .build()
+        }
+
         factory {
             get<Retrofit>(named("forecastRetrofit")).create(ForeCastService::class.java)
         }
@@ -41,6 +46,11 @@ val networkModule =
             get<Retrofit>(named("aqiRetrofit")).create(AirQualityService::class.java)
         }
 
+        factory {
+            get<Retrofit>(named("oilPriceRetrofit")).create(OilPriceService::class.java)
+        }
+
         factory<IForeCastRemoteDataSource> { ForeCastRemoteDataSource(get(), get(koinIO)) }
         factory<IAQIRemoteDataSource> { AQIRemoteDataSource(get(), get(koinIO)) }
+        factory<IOilPriceRemoteDataSource> { OilPriceRemoteDataSource(get(), get(koinIO)) }
     }

@@ -6,7 +6,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="air_quality">空氣品質</string>
     <string name="weather_forecast">氣象預報</string>
-    <string name="oil">Oil</string>
+    <string name="oil_price">今日油價</string>
     <string name="todays_top_3_air_quality">今日空氣品質前三優</string>
     <string name="no_1">NO.1 </string>
     <string name="no_2">NO.2 </string>

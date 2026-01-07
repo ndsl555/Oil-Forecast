@@ -155,6 +155,7 @@ class MainActivity :
                 setOf(
                     R.id.navigationWeatherFragment,
                     R.id.navigationAQIFragment,
+                    R.id.navigationOilPriceFragment,
                 ),
             )
 
@@ -169,6 +170,9 @@ class MainActivity :
                 }
                 R.id.navigation_weather -> {
                     navController.navigate(NavHomeGraphDirections.actionGlobalToNavigationWeatherFragment())
+                }
+                R.id.navigation_oil -> {
+                    navController.navigate(NavHomeGraphDirections.actionGlobalToNavigationOilPriceFragment())
                 }
             }
             return@setOnItemSelectedListener true

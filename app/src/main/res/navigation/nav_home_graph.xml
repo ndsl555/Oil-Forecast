@@ -30,6 +30,15 @@
     </fragment>
 
     <fragment
+        android:label="@string/oil_price"
+        android:id="@+id/navigationOilPriceFragment"
+        android:name="com.example.oil_forecast.OilPriceFragment"
+        tools:layout="@layout/fragment_oilprice"
+        />
+
+
+
+    <fragment
         android:id="@+id/aqiListFragment"
         android:name="com.example.oil_forecast.AqiListFragment"
         android:label="@string/full_list_view" />
@@ -54,6 +63,16 @@
         app:popEnterAnim="@anim/nav_push_from_left_in"
         app:popExitAnim="@anim/nav_push_from_right_out">
     </action>
+
+    <action
+        android:id="@+id/action_global_to_navigationOilPriceFragment"
+        app:destination="@id/navigationOilPriceFragment"
+        app:enterAnim="@anim/nav_push_from_right_in"
+        app:exitAnim="@anim/nav_push_from_left_out"
+        app:popEnterAnim="@anim/nav_push_from_left_in"
+        app:popExitAnim="@anim/nav_push_from_right_out">
+        </action>
+
 
 
 </navigation>
